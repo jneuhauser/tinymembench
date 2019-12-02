@@ -24,6 +24,7 @@ jobs:
     
     env:
       TOOLCHAIN_PACKAGE: crossbuild-essential-armhf
+      LIBC_PACKAGE: libc6-armhf-cross
       CROSS_C_COMPILER: "/usr/bin/arm-linux-gnueabihf-gcc"
 
     steps:
@@ -32,7 +33,7 @@ jobs:
       - name: Install QemuUserEmulation
         run: sudo apt-get install -y --no-install-recommends qemu binfmt-support qemu-user-static
       - name: Install toolchain
-        run: sudo apt-get install -y --no-install-recommends $TOOLCHAIN_PACKAGE
+        run: sudo apt-get install -y --no-install-recommends $TOOLCHAIN_PACKAGE $LIBC_PACKAGE
       - uses: actions/checkout@v1
       - name: Build with CMake
         run: |
