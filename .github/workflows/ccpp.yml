@@ -23,6 +23,8 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+    - name: Update package lists
+      run: sudo apt-get update
     - name: Install QemuUserEmulation
       run: sudo apt-get install -y --no-install-recommends qemu binfmt-support qemu-user-static
     - name: Install crossbuild-essential-armhf
