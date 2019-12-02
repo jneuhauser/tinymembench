@@ -25,7 +25,7 @@ jobs:
     steps:
       env:
         TOOLCHAIN_PACKAGE: crossbuild-essential-armhf
-        C_COMPILER: /usr/bin/arm-linux-gnueabihf-gcc
+        C_COMPILER: "/usr/bin/arm-linux-gnueabihf-gcc"
       - name: Update package lists
         run: sudo apt-get update
       - name: Install QemuUserEmulation
