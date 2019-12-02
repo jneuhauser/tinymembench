@@ -35,7 +35,7 @@ jobs:
       - name: Install toolchain and libs
         run: |
           sudo apt-get install -y --no-install-recommends $TOOLCHAIN_PACKAGE $LIBC_PACKAGE
-          ln -sf /usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3 /lib/ld-linux-armhf.so.3
+          sudo ln -sf /usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3 /lib/ld-linux-armhf.so.3
       - uses: actions/checkout@v1
       - name: Build with CMake
         run: |
