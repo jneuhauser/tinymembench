@@ -8,33 +8,36 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Build with CMake
-      run: |
-        mkdir -p build
-        cd build
-        cmake ..
-        make
-    - name: Run tinymembench
-      run: ./build/tinymembench
+      - uses: actions/checkout@v1
+      - name: Build with CMake
+        run: |
+          mkdir -p build
+          cd build
+          cmake ..
+          make
+      - name: Run tinymembench
+        run: ./build/tinymembench
 
   test-armhf:
 
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Update package lists
-      run: sudo apt-get update
-    - name: Install QemuUserEmulation
-      run: sudo apt-get install -y --no-install-recommends qemu binfmt-support qemu-user-static
-    - name: Install crossbuild-essential-armhf
-      run: sudo apt-get install -y --no-install-recommends crossbuild-essential-armhf
-    - uses: actions/checkout@v1
-    - name: Build with CMake
-      run: |
-        mkdir -p build
-        cd build
-        cmake -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc ..
-        make
-    - name: Run tinymembench
-      run: ./build/tinymembench
+      env:
+        TOOLCHAIN_PACKAGE: crossbuild-essential-armhf
+        C_COMPILER: /usr/bin/arm-linux-gnueabihf-gcc
+      - name: Update package lists
+        run: sudo apt-get update
+      - name: Install QemuUserEmulation
+        run: sudo apt-get install -y --no-install-recommends qemu binfmt-support qemu-user-static
+      - name: Install toolchain
+        run: sudo apt-get install -y --no-install-recommends $TOOLCHAIN_PACKAGE
+      - uses: actions/checkout@v1
+      - name: Build with CMake
+        run: |
+          mkdir -p build
+          cd build
+          cmake -DCMAKE_C_COMPILER=$C_COMPILER ..
+          make
+      - name: Run tinymembench
+        run: ./build/tinymembench
