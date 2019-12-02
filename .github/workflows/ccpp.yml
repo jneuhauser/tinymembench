@@ -18,7 +18,7 @@ jobs:
     - name: Run tinymembench
       run: ./build/tinymembench
 
-  test-amd64:
+  test-armhf:
 
     runs-on: ubuntu-18.04
 
