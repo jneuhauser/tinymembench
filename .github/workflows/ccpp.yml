@@ -33,9 +33,7 @@ jobs:
       - name: Install QemuUserEmulation
         run: sudo apt-get install -y --no-install-recommends qemu binfmt-support qemu-user-static
       - name: Install toolchain and libs
-        run: |
-          sudo apt-get install -y --no-install-recommends $TOOLCHAIN_PACKAGE $LIBC_PACKAGE
-          sudo ln -sf /usr/arm-linux-gnueabihf/lib/ld-linux-armhf.so.3 /lib/ld-linux-armhf.so.3
+        run: sudo apt-get install -y --no-install-recommends $TOOLCHAIN_PACKAGE $LIBC_PACKAGE
       - uses: actions/checkout@v1
       - name: Build with CMake
         run: |
@@ -44,4 +42,4 @@ jobs:
           cmake -DCMAKE_C_COMPILER=$CROSS_C_COMPILER ..
           make
       - name: Run tinymembench
-        run: ./build/tinymembench
+        run: /usr/bin/qemu-arm-static ./build/tinymembench
