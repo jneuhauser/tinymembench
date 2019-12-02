@@ -1,14 +1,6 @@
 name: C/C++ CI
 
-on:
-  push:
-    branches:
-    - master
-    - devel
-  pull_request:
-    branches:
-    - master
-    - devel
+on: [push, pull_request]
 
 jobs:
   test-amd64:
