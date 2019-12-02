@@ -11,10 +11,10 @@ on:
     - devel
 
 jobs:
-  build:
+  test-amd64:
 
     runs-on: ubuntu-18.04
-    
+
     steps:
     - uses: actions/checkout@v1
     - name: Build with CMake
@@ -22,6 +22,23 @@ jobs:
         mkdir -p build
         cd build
         cmake ..
+        make
+    - name: Run tinymembench
+      run: ./build/tinymembench
+
+  test-amd64:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Install required tools
+      run: apt-get -y install qemu binfmt-support qemu-user-static crossbuild-essential-armhf
+    - uses: actions/checkout@v1
+    - name: Build with CMake
+      run: |
+        mkdir -p build
+        cd build
+        cmake -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc ..
         make
     - name: Run tinymembench
       run: ./build/tinymembench
