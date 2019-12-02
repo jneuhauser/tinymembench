@@ -21,11 +21,12 @@ jobs:
   test-armhf:
 
     runs-on: ubuntu-18.04
+    
+    env:
+      TOOLCHAIN_PACKAGE: crossbuild-essential-armhf
+      CROSS_C_COMPILER: "/usr/bin/arm-linux-gnueabihf-gcc"
 
     steps:
-      env:
-        TOOLCHAIN_PACKAGE: crossbuild-essential-armhf
-        CROSS_C_COMPILER: "/usr/bin/arm-linux-gnueabihf-gcc"
       - name: Update package lists
         run: sudo apt-get update
       - name: Install QemuUserEmulation
