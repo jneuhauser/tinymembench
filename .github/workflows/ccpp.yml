@@ -23,8 +23,10 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Install required tools
-      run: sudo apt-get -y install qemu binfmt-support qemu-user-static crossbuild-essential-armhf
+    - name: Install QemuUserEmulation
+      run: sudo apt-get install -y --no-install-recommends qemu binfmt-support qemu-user-static
+    - name: Install crossbuild-essential-armhf
+      run: sudo apt-get install -y --no-install-recommends crossbuild-essential-armhf
     - uses: actions/checkout@v1
     - name: Build with CMake
       run: |
