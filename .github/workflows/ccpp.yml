@@ -24,7 +24,7 @@ jobs:
 
     steps:
     - name: Install required tools
-      run: apt-get -y install qemu binfmt-support qemu-user-static crossbuild-essential-armhf
+      run: sudo apt-get -y install qemu binfmt-support qemu-user-static crossbuild-essential-armhf
     - uses: actions/checkout@v1
     - name: Build with CMake
       run: |
